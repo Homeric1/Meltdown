@@ -355,3 +355,30 @@ input, textarea { font-family: inherit; }
 
 .row-between { display: flex; align-items: center; justify-content: space-between; }
 .pill { font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 99px; letter-spacing: 0.04em; }
+
+/* ---------- Auth gate (lock screen / encryption setup) ---------- */
+.flow.auth .flow-inner { justify-content: center; }
+.auth-box {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  max-width: 380px; width: 100%; margin: auto; padding: 24px 4px;
+}
+.auth-box .q-ico { font-size: 48px; }
+.auth-box .h1 { margin-bottom: 6px; }
+.auth-sub { font-size: 15px; line-height: 1.5; margin-bottom: 22px; max-width: 330px; }
+.auth-input {
+  width: 100%; padding: 15px 16px; margin-bottom: 12px;
+  background: var(--card); border: 1.5px solid var(--card-border); border-radius: 14px;
+  color: var(--text); font-size: 17px; text-align: center; letter-spacing: 0.02em;
+  transition: border-color 0.2s ease;
+}
+.auth-input::placeholder { color: var(--text-faint); letter-spacing: normal; }
+.auth-input:focus { outline: none; border-color: var(--brand); }
+.auth-box .btn { width: 100%; margin-top: 4px; }
+.auth-err { color: var(--score-low, #fb7185); font-size: 14px; font-weight: 700; min-height: 20px; margin-bottom: 6px; }
+.recovery-code {
+  width: 100%; padding: 18px 14px; margin-bottom: 16px;
+  background: var(--card-solid); border: 1.5px dashed var(--brand); border-radius: 14px;
+  color: var(--brand-2); font-size: 20px; font-weight: 800; letter-spacing: 0.12em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; line-height: 1.5;
+  -webkit-user-select: all; user-select: all;
+}

@@ -33,8 +33,21 @@ Productivité, Relations** — pour que tes analyses reflètent l'Échelle de Ge
 - 🏠 **Aujourd'hui** — un bilan guidé de 5 minutes, puis ton score du jour et ton équilibre.
 - 🗓 **Calendrier** — une carte de chaleur colorée de chaque jour (rouge = bas, vert = haut).
 - 📈 **Analyses** — tendance sur 30 jours, moyennes semaine par semaine, répartition de ton énergie et conseils sur mesure.
-- ⚙️ **Plus** — change la **langue** (Français / English), définis ton prénom, exporte tes données en JSON, réinitialise.
+- ⚙️ **Plus** — change la **langue** (Français / English), définis ton prénom, gère ta **sécurité** (mot de passe, clé de récupération), exporte tes données en JSON, réinitialise.
 - 🔒 100 % privé et hors ligne. Toutes les données restent dans le stockage de ton navigateur (`localStorage`). Rien n'est envoyé nulle part.
+
+## Sécurité &amp; confidentialité
+Au premier lancement, l'app te demande de créer un **mot de passe**. Ce mot de passe **chiffre tes bilans
+directement sur l'appareil** (Web Crypto : clé AES-GCM dérivée par PBKDF2, 250 000 itérations). Même quelqu'un
+qui inspecte le stockage du navigateur ne voit que des données chiffrées illisibles sans ton mot de passe.
+
+- Le code source de l'app est public ; **tes données ne le sont jamais** — elles ne quittent pas ton navigateur.
+- **Clé de récupération** : générée à la création et affichée une seule fois. Note-la en lieu sûr : c'est le seul
+  moyen de reprendre la main si tu oublies ton mot de passe (chiffrement à enveloppe, sans porte dérobée).
+- Tu peux changer ton mot de passe ou régénérer ta clé depuis **Plus → Sécurité**.
+- Si tu perds **et** ton mot de passe **et** ta clé de récupération, les données sont irrécupérables — par conception.
+  Pense à utiliser l'export JSON comme sauvegarde.
+- Le chiffrement nécessite un **contexte sécurisé** (https ou `localhost`), tous deux disponibles ici.
 
 ## Lancer l'app sur ton ordinateur
 ```bash

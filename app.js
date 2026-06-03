@@ -132,6 +132,51 @@
         data_cleared: "Toutes les données effacées",
         exported: "Exporté",
         score_word: "Score",
+        prog_title: "Ta progression",
+        prog_up: (d) => `En hausse de ${d} pt vs les 30 jours précédents.`,
+        prog_down: (d) => `En baisse de ${d} pt vs les 30 jours précédents.`,
+        prog_flat: "Stable par rapport aux 30 jours précédents.",
+        prog_improved: (label, d) => ` Plus forte hausse : ${label} (+${d}).`,
+        prog_declined: (label, d) => ` En recul : ${label} (−${d}).`,
+        prog_need_more: "Continue tes bilans : le suivi de progression d'une période à l'autre se débloque dès que tu auras deux périodes à comparer.",
+        life_title: "Depuis le début",
+        life_body: (n, avg) => `${n} bilan${n > 1 ? "s" : ""} enregistré${n > 1 ? "s" : ""} · moyenne de vie ${avg}/10.`,
+        life_best: (s, date) => ` Record : ${s}/10 le ${date}.`,
+        life_longest: (n) => ` Plus longue série : ${n} jour${n > 1 ? "s" : ""}.`,
+      },
+      auth: {
+        setup_title: "Protège ton journal",
+        setup_sub: "Crée un mot de passe. Il chiffre tes données sur cet appareil — personne ne peut les lire sans lui, même pas en inspectant le navigateur.",
+        pw: "Mot de passe",
+        pw_ph: "Au moins 6 caractères",
+        pw_confirm: "Confirme le mot de passe",
+        create: "Créer et chiffrer",
+        unlock_sub: "Entre ton mot de passe pour déverrouiller ton journal.",
+        unlock: "Déverrouiller",
+        working: "Chiffrement…",
+        wrong_pw: "Mot de passe incorrect.",
+        pw_short: "Choisis au moins 6 caractères.",
+        pw_mismatch: "Les deux mots de passe ne correspondent pas.",
+        forgot: "Mot de passe oublié ?",
+        recovery_title: "Récupérer l'accès",
+        recovery_sub: "Entre la clé de récupération que tu as notée à la création. Tu pourras ensuite définir un nouveau mot de passe.",
+        recovery_ph: "XXXXX-XXXXX-XXXXX-XXXXX",
+        recovery_btn: "Récupérer",
+        recovery_bad: "Clé de récupération invalide.",
+        back_to_unlock: "← Retour",
+        recovery_save_title: "Ta clé de récupération",
+        recovery_save_sub: "C'est le SEUL moyen de récupérer tes données si tu oublies ton mot de passe. Note-la et garde-la en lieu sûr — elle ne sera plus jamais réaffichée.",
+        copy: "Copier la clé",
+        copied: "Clé copiée",
+        saved_continue: "J'ai noté ma clé en lieu sûr",
+        set_new_pw_title: "Nouveau mot de passe",
+        set_new_pw_sub: "Choisis un nouveau mot de passe pour reverrouiller ton journal.",
+        security: "Sécurité &amp; confidentialité",
+        security_body: "Tes bilans sont chiffrés sur cet appareil. Ils ne quittent jamais ton navigateur.",
+        change_pw: "Changer le mot de passe",
+        new_recovery: "Régénérer la clé de récupération",
+        pw_changed: "Mot de passe modifié",
+        no_crypto: "Le chiffrement sécurisé n'est pas disponible ici. Ouvre l'app via son adresse https : homeric1.github.io/Meltdown",
       },
     },
 
@@ -255,6 +300,51 @@
         data_cleared: "All data cleared",
         exported: "Exported",
         score_word: "Score",
+        prog_title: "Your progression",
+        prog_up: (d) => `Up ${d} pts vs the previous 30 days.`,
+        prog_down: (d) => `Down ${d} pts vs the previous 30 days.`,
+        prog_flat: "Steady versus the previous 30 days.",
+        prog_improved: (label, d) => ` Biggest gain: ${label} (+${d}).`,
+        prog_declined: (label, d) => ` Slipping: ${label} (−${d}).`,
+        prog_need_more: "Keep checking in: period-over-period progression unlocks once you have two periods to compare.",
+        life_title: "Since you started",
+        life_body: (n, avg) => `${n} check-in${n > 1 ? "s" : ""} logged · lifetime average ${avg}/10.`,
+        life_best: (s, date) => ` Personal best: ${s}/10 on ${date}.`,
+        life_longest: (n) => ` Longest streak: ${n} day${n > 1 ? "s" : ""}.`,
+      },
+      auth: {
+        setup_title: "Protect your journal",
+        setup_sub: "Create a password. It encrypts your data on this device — no one can read it without it, not even by inspecting the browser.",
+        pw: "Password",
+        pw_ph: "At least 6 characters",
+        pw_confirm: "Confirm password",
+        create: "Create &amp; encrypt",
+        unlock_sub: "Enter your password to unlock your journal.",
+        unlock: "Unlock",
+        working: "Encrypting…",
+        wrong_pw: "Incorrect password.",
+        pw_short: "Use at least 6 characters.",
+        pw_mismatch: "The two passwords don't match.",
+        forgot: "Forgot your password?",
+        recovery_title: "Recover access",
+        recovery_sub: "Enter the recovery code you saved when you created your password. You'll then set a new password.",
+        recovery_ph: "XXXXX-XXXXX-XXXXX-XXXXX",
+        recovery_btn: "Recover",
+        recovery_bad: "Invalid recovery code.",
+        back_to_unlock: "← Back",
+        recovery_save_title: "Your recovery code",
+        recovery_save_sub: "This is the ONLY way to recover your data if you forget your password. Write it down and keep it safe — it will never be shown again.",
+        copy: "Copy code",
+        copied: "Code copied",
+        saved_continue: "I've saved my code safely",
+        set_new_pw_title: "New password",
+        set_new_pw_sub: "Choose a new password to re-lock your journal.",
+        security: "Security &amp; privacy",
+        security_body: "Your check-ins are encrypted on this device. They never leave your browser.",
+        change_pw: "Change password",
+        new_recovery: "Regenerate recovery code",
+        pw_changed: "Password changed",
+        no_crypto: "Secure encryption isn't available here. Open the app over its https address: homeric1.github.io/Meltdown",
       },
     },
   };
@@ -270,17 +360,157 @@
 
   /* ---------------- Storage ---------------- */
 
-  const STORE_KEY = "meltdown.entries.v1";
-  const SETTINGS_KEY = "meltdown.settings.v1";
+  const LEGACY_ENTRIES = "meltdown.entries.v1";   // old plaintext store (migrated on first setup)
+  const ENTRIES_KEY = "meltdown.entries.v2";      // encrypted store: { iv, ct }
+  const CRYPTO_KEY = "meltdown.crypto.v1";        // key-wrapping metadata
+  const SETTINGS_KEY = "meltdown.settings.v1";    // lang + name (not sensitive, kept in clear)
+
+  // In-memory, decrypted state. Populated only after the user unlocks.
+  let DEK = null;          // AES-GCM CryptoKey that encrypts the entries
+  let DEKRAW = null;       // raw DEK bytes, kept in memory to re-wrap on password / recovery change
+  let memEntries = {};     // decrypted entries cache; the rest of the app reads this synchronously
 
   const Store = {
-    load() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch { return {}; } },
-    save(data) { localStorage.setItem(STORE_KEY, JSON.stringify(data)); },
-    get(key) { return this.load()[key] || null; },
-    set(key, entry) { const d = this.load(); d[key] = entry; this.save(d); },
+    load() { return memEntries; },
+    save(data) { memEntries = data; persistEntries(); },
+    get(key) { return memEntries[key] || null; },
+    set(key, entry) { memEntries[key] = entry; persistEntries(); },
     settings() { try { return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {}; } catch { return {}; } },
     saveSettings(s) { localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); },
   };
+
+  /* ---------------- Crypto (envelope encryption, all client-side) ---------------- */
+  /* Entries are encrypted at rest with a random Data Encryption Key (DEK).
+     The DEK is wrapped twice: once by a key derived from the password, once by a
+     key derived from a recovery code. Forgetting the password is recoverable via
+     the recovery code; losing both means the data is unrecoverable by design. */
+
+  const SUBTLE = (window.crypto && window.crypto.subtle) ? window.crypto.subtle : null;
+  const PBKDF2_ITER = 250000;
+  const _enc = new TextEncoder();
+  const _dec = new TextDecoder();
+  const b64 = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf)));
+  const unb64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+
+  function cryptoConfigured() { return !!localStorage.getItem(CRYPTO_KEY); }
+
+  async function deriveKEK(secret, saltBytes) {
+    const base = await SUBTLE.importKey("raw", _enc.encode(secret), "PBKDF2", false, ["deriveKey"]);
+    return SUBTLE.deriveKey(
+      { name: "PBKDF2", salt: saltBytes, iterations: PBKDF2_ITER, hash: "SHA-256" },
+      base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]
+    );
+  }
+  async function aesEncrypt(key, bytes) {
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const ct = await SUBTLE.encrypt({ name: "AES-GCM", iv }, key, bytes);
+    return { iv: b64(iv), ct: b64(ct) };
+  }
+  async function aesDecrypt(key, obj) {
+    const pt = await SUBTLE.decrypt({ name: "AES-GCM", iv: unb64(obj.iv) }, key, unb64(obj.ct));
+    return new Uint8Array(pt);
+  }
+  const importDEK = (raw) => SUBTLE.importKey("raw", raw, { name: "AES-GCM" }, false, ["encrypt", "decrypt"]);
+
+  const RECOVERY_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; // no easily-confused chars
+  function genRecoveryCode() {
+    const bytes = crypto.getRandomValues(new Uint8Array(20));
+    let s = "";
+    for (let i = 0; i < bytes.length; i++) {
+      s += RECOVERY_ALPHABET[bytes[i] % RECOVERY_ALPHABET.length];
+      if (i % 5 === 4 && i < bytes.length - 1) s += "-";
+    }
+    return s; // e.g. ABCDE-FGHJK-MNPQR-STUVW
+  }
+  const normalizeRecovery = (s) => String(s || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+
+  // Create the very first password (and recovery code). Migrates legacy plaintext entries.
+  async function setupPassword(password) {
+    const dekRaw = crypto.getRandomValues(new Uint8Array(32));
+    const recovery = genRecoveryCode();
+    const pwSalt = crypto.getRandomValues(new Uint8Array(16));
+    const recSalt = crypto.getRandomValues(new Uint8Array(16));
+    const [kekPw, kekRec] = await Promise.all([
+      deriveKEK(password, pwSalt),
+      deriveKEK(normalizeRecovery(recovery), recSalt),
+    ]);
+    const meta = {
+      v: 1, iter: PBKDF2_ITER,
+      pwSalt: b64(pwSalt), recSalt: b64(recSalt),
+      wrapPw: await aesEncrypt(kekPw, dekRaw),
+      wrapRec: await aesEncrypt(kekRec, dekRaw),
+    };
+    localStorage.setItem(CRYPTO_KEY, JSON.stringify(meta));
+    DEKRAW = dekRaw;
+    DEK = await importDEK(dekRaw);
+    let legacy = {};
+    try { legacy = JSON.parse(localStorage.getItem(LEGACY_ENTRIES)) || {}; } catch { legacy = {}; }
+    memEntries = (legacy && typeof legacy === "object") ? legacy : {};
+    await persistEntries();
+    localStorage.removeItem(LEGACY_ENTRIES);
+    return recovery;
+  }
+
+  async function unwrapWith(secret, saltField, wrapField) {
+    const meta = JSON.parse(localStorage.getItem(CRYPTO_KEY));
+    const kek = await deriveKEK(secret, unb64(meta[saltField]));
+    try { return await aesDecrypt(kek, meta[wrapField]); } // AES-GCM auth failure => wrong secret
+    catch { return null; }
+  }
+  async function unlockWithPassword(password) {
+    const dekRaw = await unwrapWith(password, "pwSalt", "wrapPw");
+    if (!dekRaw) return false;
+    DEKRAW = dekRaw;
+    DEK = await importDEK(dekRaw);
+    await loadEntries();
+    return true;
+  }
+  async function unlockWithRecovery(code) {
+    const dekRaw = await unwrapWith(normalizeRecovery(code), "recSalt", "wrapRec");
+    if (!dekRaw) return false;
+    DEKRAW = dekRaw;
+    DEK = await importDEK(dekRaw);
+    await loadEntries();
+    return true;
+  }
+  // Re-wrap the in-memory DEK under a new password. Requires being unlocked.
+  async function changePassword(newPassword) {
+    if (!DEKRAW) return false;
+    const meta = JSON.parse(localStorage.getItem(CRYPTO_KEY));
+    const pwSalt = crypto.getRandomValues(new Uint8Array(16));
+    const kek = await deriveKEK(newPassword, pwSalt);
+    meta.pwSalt = b64(pwSalt);
+    meta.wrapPw = await aesEncrypt(kek, DEKRAW);
+    localStorage.setItem(CRYPTO_KEY, JSON.stringify(meta));
+    return true;
+  }
+  // Issue a brand-new recovery code (invalidates the old one). Requires being unlocked.
+  async function regenerateRecovery() {
+    if (!DEKRAW) return null;
+    const meta = JSON.parse(localStorage.getItem(CRYPTO_KEY));
+    const recovery = genRecoveryCode();
+    const recSalt = crypto.getRandomValues(new Uint8Array(16));
+    const kek = await deriveKEK(normalizeRecovery(recovery), recSalt);
+    meta.recSalt = b64(recSalt);
+    meta.wrapRec = await aesEncrypt(kek, DEKRAW);
+    localStorage.setItem(CRYPTO_KEY, JSON.stringify(meta));
+    return recovery;
+  }
+
+  async function persistEntries() {
+    if (!DEK) return;
+    const bytes = _enc.encode(JSON.stringify(memEntries));
+    const obj = await aesEncrypt(DEK, bytes);
+    localStorage.setItem(ENTRIES_KEY, JSON.stringify(obj));
+  }
+  async function loadEntries() {
+    const raw = localStorage.getItem(ENTRIES_KEY);
+    if (!raw) { memEntries = {}; return; }
+    try {
+      const bytes = await aesDecrypt(DEK, JSON.parse(raw));
+      memEntries = JSON.parse(_dec.decode(bytes)) || {};
+    } catch { memEntries = {}; }
+  }
 
   /* ---------------- Language ---------------- */
 
@@ -288,6 +518,10 @@
   const L = () => DICT[LANG];
   const t = (key, ...args) => {
     const v = L().ui[key];
+    return typeof v === "function" ? v(...args) : v;
+  };
+  const tA = (key, ...args) => {
+    const v = L().auth[key];
     return typeof v === "function" ? v(...args) : v;
   };
   function setLang(lang) {
@@ -724,32 +958,71 @@
     }).join("");
   }
 
-  /* ----- Recommendations engine ----- */
+  /* ----- Recommendations engine -----
+     Recommendations adapt as history grows: a progression card compares the last
+     30 days against the previous 30, the focus tip is chosen by that category's
+     trend, and a lifetime card surfaces stats that get richer over time. */
   function recommendations(catAvg, lowest, highest, avg30, streak) {
     const recos = [];
     const loMeta = CAT_META[lowest], hiMeta = CAT_META[highest];
 
+    // Compare recent (last 30 days) vs previous (days 31–60) for true progression.
+    const prev = entriesInWindow(60, 31);
+    const prevAvg = avgScore(prev);
+    const prevCat = catAvgOf(prev);
+    const catDelta = (k) => (prev.length ? catAvg[k] - prevCat[k] : null);
+
+    // 1) Progression card — only meaningful once there's a prior period to compare.
+    if (prevAvg != null && avg30 != null) {
+      const d = +(avg30 - prevAvg).toFixed(1);
+      let body = d > 0.1 ? t("prog_up", Math.abs(d).toFixed(1))
+               : d < -0.1 ? t("prog_down", Math.abs(d).toFixed(1))
+               : t("prog_flat");
+      // Most improved / most declined category over the same windows.
+      const deltas = CAT_KEYS.map((k) => ({ k, d: catAvg[k] - prevCat[k] }));
+      const up = deltas.slice().sort((a, b) => b.d - a.d)[0];
+      const down = deltas.slice().sort((a, b) => a.d - b.d)[0];
+      if (up && up.d > 0.1) body += t("prog_improved", catLabel(up.k), up.d.toFixed(1));
+      if (down && down.d < -0.1 && down.k !== up.k) body += t("prog_declined", catLabel(down.k), Math.abs(down.d).toFixed(1));
+      recos.push({ icon: d >= 0 ? "📈" : "📉", color: d >= 0 ? "#34d399" : "#fb7185", title: t("prog_title"), body });
+    } else {
+      recos.push({ icon: "📈", color: "#8b7cff", title: t("prog_title"), body: t("prog_need_more") });
+    }
+
+    // 2) Focus area — tip chosen by whether that area is trending up, flat, or down.
     recos.push({
       icon: loMeta.icon, color: loMeta.color,
       title: t("focus", catLabel(lowest), catAvg[lowest].toFixed(1)),
-      body: pickTip(lowest),
+      body: pickTip(lowest, catDelta(lowest)),
     });
 
+    // 3) Strength
     recos.push({
       icon: hiMeta.icon, color: hiMeta.color,
       title: t("strength", catLabel(highest), catAvg[highest].toFixed(1)),
       body: t("strength_body", catLabel(lowest).toLowerCase()),
     });
 
+    // 4) Band message on the 30-day average
     if (avg30 != null) {
       const band = scoreBand(avg30);
-      let body;
-      if (avg30 >= 7) body = t("band_high");
-      else if (avg30 >= 5) body = t("band_mid");
-      else body = t("band_low");
+      const body = avg30 >= 7 ? t("band_high") : avg30 >= 5 ? t("band_mid") : t("band_low");
       recos.push({ icon: "🧭", color: "#8b7cff", title: t("band30", avg30.toFixed(1), band.label), body });
     }
 
+    // 5) Lifetime card — grows richer the longer you keep at it.
+    const all = allEntries();
+    const life = allTimeAvg();
+    if (life != null) {
+      const best = personalBest();
+      const longest = longestStreak();
+      let body = t("life_body", all.length, life.toFixed(1));
+      if (best) body += t("life_best", best.score, prettyDate(parseKey(best.date)));
+      if (longest >= 2) body += t("life_longest", longest);
+      recos.push({ icon: "🏅", color: "#fbbf24", title: t("life_title"), body });
+    }
+
+    // 6) Streak nudge
     recos.push({
       icon: "🔥", color: "#fbbf24",
       title: streak >= 3 ? t("streak_title_on", streak) : t("streak_title_off"),
@@ -763,10 +1036,13 @@
       </div>`).join("");
   }
 
-  function pickTip(cat) {
+  // Pick a tip for a category, steered by its recent trend (declining → most actionable).
+  function pickTip(cat, delta) {
     const list = L().tips[cat];
-    const idx = (allEntries().length) % list.length;
-    return list[idx];
+    if (delta == null) return list[allEntries().length % list.length];
+    if (delta < -0.15) return list[0];
+    if (delta > 0.15) return list[2];
+    return list[1];
   }
 
   /* ===========================================================
@@ -968,6 +1244,14 @@
             <p class="muted" style="font-size:14px">${t("reminder_body")}</p>
           </div>
           <div class="card">
+            <div class="h2" style="margin-bottom:8px">${tA("security")}</div>
+            <p class="muted" style="font-size:14px;margin-bottom:14px">${tA("security_body")}</p>
+            <div class="btn-row">
+              <button class="btn secondary" data-changepw>${tA("change_pw")}</button>
+              <button class="btn secondary" data-newrec>${tA("new_recovery")}</button>
+            </div>
+          </div>
+          <div class="card">
             <div class="h2" style="margin-bottom:8px">${t("your_data")}</div>
             <p class="muted" style="font-size:14px;margin-bottom:14px">${t("data_count", count)}</p>
             <div class="btn-row">
@@ -994,9 +1278,16 @@
       };
     });
     overlay.querySelector("[data-export]").onclick = () => exportData();
+    overlay.querySelector("[data-changepw]").onclick = () => { saveName(); close(); renderSetNewPassword(); };
+    overlay.querySelector("[data-newrec]").onclick = async () => {
+      saveName();
+      const code = await regenerateRecovery();
+      close();
+      if (code) renderRecoverySave(code, () => render());
+    };
     overlay.querySelector("[data-reset]").onclick = () => {
       if (confirm(t("reset_confirm"))) {
-        localStorage.removeItem(STORE_KEY);
+        memEntries = {}; persistEntries();
         close(); state.tab = "today"; render(); toast(t("data_cleared"));
       }
     };
@@ -1052,6 +1343,40 @@
     }
     return streak;
   }
+  // Entries whose offset from today is within [endAgo .. startAgo] days (startAgo is older).
+  function entriesInWindow(startAgo, endAgo) {
+    const base = today(), out = [];
+    for (let i = startAgo; i >= endAgo; i--) {
+      const e = Store.get(keyOf(new Date(base.getFullYear(), base.getMonth(), base.getDate() - i)));
+      if (e) out.push(e);
+    }
+    return out;
+  }
+  const avgScore = (arr) => (arr.length ? arr.reduce((a, e) => a + e.score, 0) / arr.length : null);
+  function catAvgOf(arr) {
+    const out = {};
+    for (const k of CAT_KEYS) {
+      const vals = arr.map((e) => categoryScores(e.ratings)[k]);
+      out[k] = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+    }
+    return out;
+  }
+  function longestStreak() {
+    const all = allEntries();
+    if (!all.length) return 0;
+    let best = 1, cur = 1;
+    for (let i = 1; i < all.length; i++) {
+      const diff = Math.round((parseKey(all[i].date) - parseKey(all[i - 1].date)) / 86400000);
+      if (diff === 1) { cur++; best = Math.max(best, cur); }
+      else if (diff > 1) cur = 1;
+    }
+    return best;
+  }
+  function personalBest() {
+    const all = allEntries();
+    return all.length ? all.reduce((m, e) => (e.score > m.score ? e : m), all[0]) : null;
+  }
+  const allTimeAvg = () => avgScore(allEntries());
 
   /* ---------------- Utils ---------------- */
   function escapeHtml(s) {
@@ -1066,11 +1391,135 @@
     return `rgba(${r},${g},${b},${a})`;
   }
 
+  /* ===========================================================
+     AUTH GATE — lock screen + first-run encryption setup
+     =========================================================== */
+
+  function hideNav() { const n = document.querySelector(".bottom-nav"); if (n) n.style.display = "none"; }
+  function authShell(inner) {
+    return `<div class="flow auth"><div class="flow-inner"><div class="auth-box fade-in">${inner}</div></div></div>`;
+  }
+  const pwInput = (attr, ph, auto) =>
+    `<input class="auth-input" type="password" ${attr} placeholder="${escapeAttr(ph)}" autocomplete="${auto}" autocapitalize="off" />`;
+
+  function renderGate() {
+    hideNav();
+    if (!SUBTLE) {
+      app.innerHTML = authShell(`<div class="q-ico">🔒</div><div class="h1">Meltdown</div><p class="muted auth-sub">${tA("no_crypto")}</p>`);
+      return;
+    }
+    if (cryptoConfigured()) renderLock(); else renderSetup();
+  }
+
+  function renderSetup() {
+    hideNav();
+    app.innerHTML = authShell(`
+      <div class="q-ico">🔐</div>
+      <div class="h1">${tA("setup_title")}</div>
+      <p class="muted auth-sub">${tA("setup_sub")}</p>
+      ${pwInput("data-pw", tA("pw_ph"), "new-password")}
+      ${pwInput("data-pw2", tA("pw_confirm"), "new-password")}
+      <div class="auth-err" data-err></div>
+      <button class="btn" data-go>${tA("create")}</button>`);
+    const pw = app.querySelector("[data-pw]"), pw2 = app.querySelector("[data-pw2]");
+    const err = app.querySelector("[data-err]"), go = app.querySelector("[data-go]");
+    const submit = async () => {
+      if (pw.value.length < 6) { err.textContent = tA("pw_short"); return; }
+      if (pw.value !== pw2.value) { err.textContent = tA("pw_mismatch"); return; }
+      err.textContent = ""; go.disabled = true; go.textContent = tA("working");
+      const recovery = await setupPassword(pw.value);
+      renderRecoverySave(recovery, () => render());
+    };
+    go.onclick = submit;
+    pw2.addEventListener("keydown", (e) => { if (e.key === "Enter") submit(); });
+    setTimeout(() => pw.focus(), 50);
+  }
+
+  function renderRecoverySave(recovery, onDone) {
+    hideNav();
+    app.innerHTML = authShell(`
+      <div class="q-ico">🗝️</div>
+      <div class="h1">${tA("recovery_save_title")}</div>
+      <p class="muted auth-sub">${tA("recovery_save_sub")}</p>
+      <div class="recovery-code">${escapeHtml(recovery)}</div>
+      <button class="btn secondary" data-copy>${tA("copy")}</button>
+      <button class="btn" data-done>${tA("saved_continue")}</button>`);
+    app.querySelector("[data-copy]").onclick = async () => {
+      try { await navigator.clipboard.writeText(recovery); toast(tA("copied")); } catch { /* clipboard blocked */ }
+    };
+    app.querySelector("[data-done]").onclick = onDone;
+  }
+
+  function renderLock() {
+    hideNav();
+    app.innerHTML = authShell(`
+      <div class="q-ico">🔒</div>
+      <div class="h1">Meltdown</div>
+      <p class="muted auth-sub">${tA("unlock_sub")}</p>
+      ${pwInput("data-pw", tA("pw"), "current-password")}
+      <div class="auth-err" data-err></div>
+      <button class="btn" data-go>${tA("unlock")}</button>
+      <button class="btn ghost" data-forgot>${tA("forgot")}</button>`);
+    const pw = app.querySelector("[data-pw]"), err = app.querySelector("[data-err]"), go = app.querySelector("[data-go]");
+    const submit = async () => {
+      err.textContent = ""; go.disabled = true; go.textContent = tA("working");
+      if (await unlockWithPassword(pw.value)) { render(); }
+      else { err.textContent = tA("wrong_pw"); go.disabled = false; go.textContent = tA("unlock"); pw.select(); }
+    };
+    go.onclick = submit;
+    pw.addEventListener("keydown", (e) => { if (e.key === "Enter") submit(); });
+    app.querySelector("[data-forgot]").onclick = () => renderRecovery();
+    setTimeout(() => pw.focus(), 50);
+  }
+
+  function renderRecovery() {
+    hideNav();
+    app.innerHTML = authShell(`
+      <div class="q-ico">🗝️</div>
+      <div class="h1">${tA("recovery_title")}</div>
+      <p class="muted auth-sub">${tA("recovery_sub")}</p>
+      <input class="auth-input" type="text" data-rec placeholder="${escapeAttr(tA("recovery_ph"))}" autocomplete="off" autocapitalize="characters" spellcheck="false" />
+      <div class="auth-err" data-err></div>
+      <button class="btn" data-go>${tA("recovery_btn")}</button>
+      <button class="btn ghost" data-back>${tA("back_to_unlock")}</button>`);
+    const rec = app.querySelector("[data-rec]"), err = app.querySelector("[data-err]"), go = app.querySelector("[data-go]");
+    const submit = async () => {
+      err.textContent = ""; go.disabled = true; go.textContent = tA("working");
+      if (await unlockWithRecovery(rec.value)) { renderSetNewPassword(); }
+      else { err.textContent = tA("recovery_bad"); go.disabled = false; go.textContent = tA("recovery_btn"); }
+    };
+    go.onclick = submit;
+    app.querySelector("[data-back]").onclick = () => renderLock();
+  }
+
+  function renderSetNewPassword() {
+    hideNav();
+    app.innerHTML = authShell(`
+      <div class="q-ico">🔐</div>
+      <div class="h1">${tA("set_new_pw_title")}</div>
+      <p class="muted auth-sub">${tA("set_new_pw_sub")}</p>
+      ${pwInput("data-pw", tA("pw_ph"), "new-password")}
+      ${pwInput("data-pw2", tA("pw_confirm"), "new-password")}
+      <div class="auth-err" data-err></div>
+      <button class="btn" data-go>${tA("change_pw")}</button>`);
+    const pw = app.querySelector("[data-pw]"), pw2 = app.querySelector("[data-pw2]");
+    const err = app.querySelector("[data-err]"), go = app.querySelector("[data-go]");
+    go.onclick = async () => {
+      if (pw.value.length < 6) { err.textContent = tA("pw_short"); return; }
+      if (pw.value !== pw2.value) { err.textContent = tA("pw_mismatch"); return; }
+      err.textContent = ""; go.disabled = true; go.textContent = tA("working");
+      await changePassword(pw.value);
+      toast(tA("pw_changed")); render();
+    };
+    setTimeout(() => pw.focus(), 50);
+  }
+
   /* ---------------- PWA service worker ---------------- */
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
   }
 
   /* ---------------- Go ---------------- */
-  render();
+  document.documentElement.lang = LANG;
+  renderGate();
 })();

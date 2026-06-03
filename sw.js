@@ -1,5 +1,5 @@
 /* Meltdown PWA service worker — offline-first cache */
-const CACHE = "meltdown-v3";
+const CACHE = "meltdown-v4";
 const ASSETS = [
   "./",
   "./index.html",
@@ -9,6 +9,7 @@ const ASSETS = [
   "./icons/icon-180.png",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
+  "./icons/icon-512-maskable.png",
 ];
 
 self.addEventListener("install", (e) => {
